@@ -11,17 +11,23 @@ You can use Catalyst AppSail to host your React application in Catalyst. Please 
 
 In the case of MacOS or Linux, run the below with the **sudo**
 
-``sudo npm install -g zcatalyst-cli@latest``
+```bash
+sudo npm install -g zcatalyst-cli@latest
+```
 
 In the case of Windows, run the below command in your Command prompt Administrator mode.
 
-``npm install -g zcatalyst-cli@latest``
+```bash
+npm install -g zcatalyst-cli@latest
+```
 
 You can find the help documentation for installing Catalyst CLI [here](https://docs.catalyst.zoho.com/en/getting-started/installing-catalyst-cli/). The above command will install Catalyst CLI on your local machine. Now run the command ``catalyst -v``to check whether the CLI has been installed properly. If installed properly, the above command should list the version number which has been installed.
 
 3. Now, run the below command to log in to the Catalyst CLI. You can find the help documentation for Catalyst login [here](https://docs.catalyst.zoho.com/en/cli/v1/login/login-from-cli/).
 
-``catalyst login``
+```bash
+catalyst login
+```
 
 **Steps for application setup:**
 
@@ -29,13 +35,17 @@ If you face any file permission-related errors while running the below commands 
 
 1. Create a new folder on your local machine. Navigate to the created folder and Initialize a Catalyst project by running the below command
 
-``catalyst init``
+```bash
+catalyst init
+```
 
 Select your project and then press Enter without selecting any options. A file named **catalyst.json** will be created. (Let's call it as your project directory)
 
 2. Create a new folder named React in the project directory where your catalyst.json file is present. Initialize an AppSail service by navigating to your React folder by running the below command
 
-``catalyst appsail:add``
+```bash
+catalyst appsail:add
+```
 
 CLI output for reference:
 
@@ -51,23 +61,31 @@ Please choose a stack for your AppSail:  NodeJS 18
 
 3. From the Appsail directory({Your project directory}/React/), initialize a new React app by using the below command. Enter the defaults.
 
-``npx create-react-app client``
+```bash
+npx create-react-app client
+```
 
 A folder named **client** will be created. Run the command npm run dev inside the client folder to check whether the project is getting served in localhost without any errors. Once your project is running error-free, you can proceed to step 4.
 
-4. From the Appsail directory({Your project directory}/React/), Create a folder named **server**. Navigate to your server folder and then run the below commands to initialize a node server endpoint.
+4. You can copy the client folder's **public** and **src** files which contains the Embedded Authentication code snippets from the repository and replace them in the (***{your_project_folder}/React/client/***) folder
 
-``npm init``
+5. From the Appsail directory({Your project directory}/React/), Create a folder named **server**. Navigate to your server folder and then run the below commands to initialize a node server endpoint.
+
+```bash
+npm init
+```
 
 Enter the defaults. This will create a package.json file in the server folder.
 
-5. Run the below commands to install the required node modules.
+6. Run the below commands to install the required node modules.
 
-``npm install express``
+```bash
+npm install express
+```
 
 node_modules folder will be created under the server folder.
 
-6. Create a new file named **index.js** and paste the below contents. This will act as a proxy server to serve your compiled react client files.
+7. Create a new file named **index.js** and paste the below contents. This will act as a proxy server to serve your compiled react client files.
 
 You should listen to the port configured by Catalyst via the environment variable 'X_ZOHO_CATALYST_LISTEN_PORT;
 
@@ -90,7 +108,7 @@ app.listen(port, () => {
 }); 
 ```
 
-7. Create a folder named **scripts** in the AppSail directory. Create a file named **filesHelper.js** inside the scripts folder. This file can be used to copy the files from the server and client to the Appsail build path. Copy the below code and paste it into filesHelper.js
+8. Create a folder named **scripts** in the AppSail directory. Create a file named **filesHelper.js** inside the scripts folder. This file can be used to copy the files from the server and client to the Appsail build path. Copy the below code and paste it into filesHelper.js
 
 ```const
 const Path = require('path');
@@ -174,8 +192,8 @@ async function deleteFolder(destinationPath) {
 }
 ```
 
-8. Create a new folder named **build** in your Appsail directory and create two folder named **server** and **client** inside the build folder. The build folder will contain your react compiled files and the server to serve your client files. You need to point this build folder as your **build_path** in the next step.
-9. Navigate to app-config.json in your AppSail directory and update the **build_path** and scripts like the config below
+9. Create a new folder named **build** in your Appsail directory and create two folder named **server** and **client** inside the build folder. The build folder will contain your react compiled files and the server to serve your client files. You need to point this build folder as your **build_path** in the next step.
+10. Navigate to app-config.json in your AppSail directory and update the **build_path** and scripts like the config below
 
 ```{
 	"command": "node ./server/index.js",
@@ -195,15 +213,19 @@ async function deleteFolder(destinationPath) {
 }
 ```
 
-9. Navigate back to the project directory and run the below command in order to test your application in local.
+11. Navigate back to the project directory and run the below command in order to test your application in local.
 
-``catalyst serve``
+```bash
+catalyst serve
+```
 
 A folder named build will be created and all the compiled files of the react client and the server folder will be copied to the build folder and then served in localhost. Your appsail service will be served in localhost:3001
 
-10. Once you have tested your appsail locally, you can then deploy your AppSail service to the development environment by running the command below
+12. Once you have tested your appsail locally, you can then deploy your AppSail service to the development environment by running the command below
 
-``catalyst deploy``
+```bash
+catalyst deploy
+```
 
 A folder named build will be created and all the compiled files of the react client and the server folder will be copied to the build folder and then the build folder is deployed to the Console. Only the files inside the build folder will be deployed and you need to maintain your source code files in Github for later use.
 

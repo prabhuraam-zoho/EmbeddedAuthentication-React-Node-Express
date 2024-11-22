@@ -6,6 +6,7 @@ const appDir = path.join(__dirname, '../client')
 const port = process.env.X_ZOHO_CATALYST_LISTEN_PORT || 9000;
  
 app.get('/', function (req, res) {
+    console.log("Directory:",appDir)
   res.sendFile(path.join(appDir, 'index.html'))
 })
  
